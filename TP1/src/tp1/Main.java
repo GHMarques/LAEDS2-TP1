@@ -18,11 +18,27 @@ public class Main {
     public static void main(String[] args) {
         try {
             ExtraiPalavra palavras = new ExtraiPalavra (args[0], args[1]);
-            String palavra = null; int i = 1;
-            while ((palavra = palavras.proximaPalavra())!=null)
-                System.out.println ("Palavra"+ (i++) +": " + palavra); 
+            String palavra = null; 
+            int auxLine = 0; int col = 1;
+            ArvorePatricia dict = new ArvorePatricia (80);
+            while ((palavra = palavras.proximaPalavra())!=null){
+                if(!palavra.equals("")){
+                    if(auxLine != palavras.line){
+                        col = 1;
+                        auxLine = palavras.line;
+                    }
+                    //System.out.printf ("Palavra [%d,%d] = %s\n",palavras.line,col,palavra);
+                    Posicao p = new Posicao(palavras.line,col);
+                    dict.insere(palavra, p);
+                    col++;
+                }
+            }
             palavras.fecharArquivos();
-        } catch (Exception e) {System.out.println (e.getMessage ());}
+            String kkk = "que";
+            dict.pesquisa(kkk);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }

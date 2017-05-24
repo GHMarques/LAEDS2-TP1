@@ -16,17 +16,19 @@ public class ExtraiPalavra {
     private BufferedReader arqDelim, arqTxt;
     private StringTokenizer palavras;
     private String delimitadores;
-
+    public int line;
     public ExtraiPalavra (String nomeArqDelim, String nomeArqTxt) throws Exception {
         this.arqDelim = new BufferedReader (new FileReader (nomeArqDelim));
         this.arqTxt = new BufferedReader (new FileReader (nomeArqTxt));
         // @{\it Os delimitadores devem estar juntos em uma \'unica linha do arquivo}@ 
         this.delimitadores = arqDelim.readLine() + "\r\n"; 
         this.palavras = null;
+        this.line = 0;
     }  
     public String proximaPalavra () throws Exception{
         if (palavras == null || !palavras.hasMoreTokens()) {
             String linha = arqTxt.readLine();
+            this.line++;
             if (linha == null) 
                 return null; 
             this.palavras = new StringTokenizer (linha, this.delimitadores);
