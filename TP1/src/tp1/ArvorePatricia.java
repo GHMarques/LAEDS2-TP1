@@ -70,7 +70,13 @@ public class ArvorePatricia {
         if (this.eExterno(t)) {
             PatNoExt aux = (PatNoExt) t;
             if (aux.chave.equalsIgnoreCase(k)) {
-                System.out.println("Elemento encontrado");
+                System.out.println("Elemento '" + k + "' encontrado");
+                for(int i = 0; i < aux.pos.size() ; i++ ){
+                    System.out.print( aux.pos.get(i).toString());
+                    if(i != aux.pos.size()-1)
+                        System.out.print(", ");
+                }
+                System.out.print("\n");
             } else {
                 System.out.println("Elemento nao encontrado");
             }
@@ -126,7 +132,7 @@ public class ArvorePatricia {
                 i++;
             }
             if (i > this.nbitsChave) {
-                System.out.println("Erro: chave ja esta na arvore");
+                aux.pos.add(pos);
                 return t;
             } else {
                 return this.insereEntre(k, t, i, pos);

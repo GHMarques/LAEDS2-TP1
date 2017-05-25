@@ -12,5 +12,11 @@ public class Posicao {
         this.linha = l;
     }
     
+    @Override
+    public String toString(){
+        String retorno = "{[" + this.linha + "]" + "[" + this.coluna + "]}";
+        return retorno;
+    }
+    
     
 }
