@@ -17,14 +17,26 @@ public class ExtraiPalavra {
     private StringTokenizer palavras;
     private String delimitadores;
     public int line;
+    /**
+     * Funcao que le todas as palavras do arquivo de texto fornecido obedecendo os delimitadores
+     * @param nomeArqDelim
+     * @param nomeArqTxt
+     * @throws Exception 
+     */
     public ExtraiPalavra (String nomeArqDelim, String nomeArqTxt) throws Exception {
         this.arqDelim = new BufferedReader (new FileReader (nomeArqDelim));
         this.arqTxt = new BufferedReader (new FileReader (nomeArqTxt));
-        // @{\it Os delimitadores devem estar juntos em uma \'unica linha do arquivo}@ 
-        this.delimitadores = arqDelim.readLine() + "\r\n"; 
+        // Armazena os delimitadores
+        this.delimitadores = arqDelim.readLine() + "\r\n"; // Os delimitadores devem estar juntos em uma unica linha do arquivo
         this.palavras = null;
         this.line = 0;
-    }  
+    }
+    
+    /**
+     * Funcao que retorna a proxima palavra
+     * @return String
+     * @throws Exception 
+     */
     public String proximaPalavra () throws Exception{
         if (palavras == null || !palavras.hasMoreTokens()) {
             String linha = arqTxt.readLine();
@@ -33,10 +45,12 @@ public class ExtraiPalavra {
                 return null; 
             this.palavras = new StringTokenizer (linha, this.delimitadores);
             if (!palavras.hasMoreTokens()) 
-                return ""; // @{\it ignora delimitadores}@
+                return ""; // Ignora delimitadores
         }
         return this.palavras.nextToken ();
-    }  
+    }
+    
+    //Metodo que fecha o arquivo de delimitadores e o de texto
     public void fecharArquivos () throws Exception {
         this.arqDelim.close(); 
         this.arqTxt.close();
